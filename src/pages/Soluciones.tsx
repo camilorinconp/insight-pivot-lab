@@ -121,69 +121,78 @@ const Soluciones = () => {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Problems */}
-                <Card className="border-0 shadow-card">
-                  <CardHeader>
-                    <CardTitle className="flex items-center text-lg">
-                      <Target className="w-5 h-5 text-destructive mr-2" />
-                      Problemas que Resolvemos
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-3">
-                      {service.problems.map((problem, idx) => (
-                        <li key={idx} className="flex items-start">
-                          <div className="w-2 h-2 bg-destructive rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                          <span className="text-muted-foreground">{problem}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
+              <Tabs defaultValue="problems" className="w-full">
+                <TabsList className="grid w-full grid-cols-1 h-auto sm:grid-cols-3 mb-8">
+                  <TabsTrigger value="problems" className="text-base py-3">Problemas</TabsTrigger>
+                  <TabsTrigger value="benefits" className="text-base py-3">Beneficios</TabsTrigger>
+                  <TabsTrigger value="process" className="text-base py-3">Proceso</TabsTrigger>
+                </TabsList>
 
-                {/* Benefits */}
-                <Card className="border-0 shadow-card">
-                  <CardHeader>
-                    <CardTitle className="flex items-center text-lg">
-                      <CheckCircle className="w-5 h-5 text-electric mr-2" />
-                      Beneficios Clave
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-3">
-                      {service.benefits.map((benefit, idx) => (
-                        <li key={idx} className="flex items-start">
-                          <CheckCircle className="w-5 h-5 text-electric mt-0.5 mr-3 flex-shrink-0" />
-                          <span className="text-foreground font-medium">{benefit}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
+                <TabsContent value="problems">
+                  <Card className="border-0 shadow-card">
+                    <CardHeader>
+                      <CardTitle className="flex items-center text-lg">
+                        <Target className="w-5 h-5 text-destructive mr-2" />
+                        Problemas que Resolvemos
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-3">
+                        {service.problems.map((problem, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <div className="w-2 h-2 bg-destructive rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <span className="text-muted-foreground">{problem}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
 
-                {/* Process */}
-                <Card className="border-0 shadow-card">
-                  <CardHeader>
-                    <CardTitle className="flex items-center text-lg">
-                      <Zap className="w-5 h-5 text-primary mr-2" />
-                      Nuestro Proceso
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-3">
-                      {service.process.map((step, idx) => (
-                        <li key={idx} className="flex items-start">
-                          <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-bold mr-3 flex-shrink-0 mt-0.5">
-                            {idx + 1}
-                          </div>
-                          <span className="text-muted-foreground">{step}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              </div>
+                <TabsContent value="benefits">
+                  <Card className="border-0 shadow-card">
+                    <CardHeader>
+                      <CardTitle className="flex items-center text-lg">
+                        <CheckCircle className="w-5 h-5 text-electric mr-2" />
+                        Beneficios Clave
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-3">
+                        {service.benefits.map((benefit, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <CheckCircle className="w-5 h-5 text-electric mt-0.5 mr-3 flex-shrink-0" />
+                            <span className="text-foreground font-medium">{benefit}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="process">
+                  <Card className="border-0 shadow-card">
+                    <CardHeader>
+                      <CardTitle className="flex items-center text-lg">
+                        <Zap className="w-5 h-5 text-primary mr-2" />
+                        Nuestro Proceso
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-3">
+                        {service.process.map((step, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-bold mr-3 flex-shrink-0 mt-0.5">
+                              {idx + 1}
+                            </div>
+                            <span className="text-muted-foreground">{step}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              </Tabs>
             </div>
           </div>
         </section>

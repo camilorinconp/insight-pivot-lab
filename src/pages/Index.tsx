@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AICalculator from "@/components/AICalculator";
 import heroImage from "@/assets/hero-bg.jpg";
 import servicesImage from "@/assets/services-icons.jpg";
 import teamImage from "@/assets/team-work.jpg";
@@ -58,7 +59,7 @@ const Index = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative pt-16 pb-20 lg:pt-24 lg:pb-32 overflow-hidden">
+      <section className="relative pt-24 pb-20 lg:pt-32 lg:pb-40 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroImage})` }}
@@ -148,6 +149,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* AI ROI Calculator Section */}
+      <AICalculator />
 
       {/* Benefits Section */}
       <section className="py-20 bg-gradient-subtle">

@@ -1,11 +1,15 @@
+import { useState } from "react";
 import { ArrowRight, TrendingUp, Clock, DollarSign, Users, Factory, ShoppingCart, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { cn } from "@/lib/utils";
 
 const CasosExito = () => {
+  const [selectedIndustry, setSelectedIndustry] = useState("Todos");
+
   const successStories = [
     {
       company: "LogiTech Solutions",
@@ -67,12 +71,17 @@ const CasosExito = () => {
   ];
 
   const industries = [
-    { name: "Logística", count: "12", icon: <Truck className="w-5 h-5" /> },
-    { name: "Retail", count: "8", icon: <ShoppingCart className="w-5 h-5" /> },
-    { name: "Manufactura", count: "15", icon: <Factory className="w-5 h-5" /> },
-    { name: "Fintech", count: "6", icon: <DollarSign className="w-5 h-5" /> },
-    { name: "Salud", count: "4", icon: <Users className="w-5 h-5" /> }
+    { name: "Todos", icon: null },
+    { name: "Logística", icon: <Truck className="w-5 h-5" /> },
+    { name: "Retail", icon: <ShoppingCart className="w-5 h-5" /> },
+    { name: "Manufactura", icon: <Factory className="w-5 h-5" /> },
+    { name: "Fintech", icon: <DollarSign className="w-5 h-5" /> },
+    { name: "Salud", icon: <Users className="w-5 h-5" /> }
   ];
+
+  const filteredStories = selectedIndustry === "Todos"
+    ? successStories
+    : successStories.filter(story => story.industry === selectedIndustry);
 
   return (
     <div className="min-h-screen bg-background">
@@ -112,19 +121,29 @@ const CasosExito = () => {
         </div>
       </section>
 
-      {/* Industries */}
+      {/* Industries Filter */}
       <section className="py-12 bg-background-accent">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-semibold text-primary mb-4">Industrias que Transformamos</h2>
-            <div className="flex flex-wrap justify-center gap-4">
+            <h2 className="text-2xl font-semibold text-primary mb-4">Filtrar por Industria</h2>
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
               {industries.map((industry, index) => (
-                <Badge key={index} variant="outline" className="px-4 py-2 border-electric text-electric">
+                <Button
+                  key={index}
+                  variant="outline"
+                  className={cn(
+                    "px-4 py-2 rounded-full text-sm font-medium transition-colors",
+                    selectedIndustry === industry.name
+                      ? "bg-electric text-electric-foreground border-electric shadow-md"
+                      : "border-border text-muted-foreground hover:bg-muted"
+                  )}
+                  onClick={() => setSelectedIndustry(industry.name)}
+                >
                   <span className="flex items-center gap-2">
                     {industry.icon}
-                    {industry.name} ({industry.count})
+                    {industry.name}
                   </span>
-                </Badge>
+                </Button>
               ))}
             </div>
           </div>
@@ -135,86 +154,92 @@ const CasosExito = () => {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="space-y-20">
-            {successStories.map((story, index) => (
-              <div key={index} className="max-w-6xl mx-auto">
-                <Card className="border-0 shadow-elegant overflow-hidden">
-                  <CardHeader className="bg-gradient-subtle pb-8">
-                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                      <div className="flex items-center gap-4">
-                        <div className="w-16 h-16 bg-electric/10 rounded-2xl flex items-center justify-center">
-                          {story.icon}
+            {filteredStories.length > 0 ? (
+              filteredStories.map((story, index) => (
+                <div key={index} className="max-w-6xl mx-auto">
+                  <Card className="border-0 shadow-elegant overflow-hidden">
+                    <CardHeader className="bg-gradient-subtle pb-8">
+                      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                        <div className="flex items-center gap-4">
+                          <div className="w-16 h-16 bg-electric/10 rounded-2xl flex items-center justify-center">
+                            {story.icon}
+                          </div>
+                          <div>
+                            <CardTitle className="text-2xl font-bold text-primary">{story.company}</CardTitle>
+                            <div className="flex gap-2 mt-2">
+                              <Badge variant="outline">{story.industry}</Badge>
+                              <Badge variant="outline">{story.size}</Badge>
+                            </div>
+                          </div>
                         </div>
+                        <div className="text-right">
+                          <div className="text-sm text-muted-foreground">Implementación</div>
+                          <div className="font-semibold text-primary">{story.implementation}</div>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    
+                    <CardContent className="p-8">
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        {/* Challenge & Solution */}
+                        <div className="space-y-6">
+                          <div>
+                            <h3 className="text-lg font-semibold text-primary mb-3 flex items-center">
+                              <span className="w-6 h-6 bg-destructive/10 rounded-full flex items-center justify-center mr-2">
+                                <span className="text-destructive text-xs">!</span>
+                              </span>
+                              El Desafío
+                            </h3>
+                            <h4 className="font-semibold mb-2">{story.challenge}</h4>
+                            <p className="text-muted-foreground leading-relaxed">{story.description}</p>
+                          </div>
+                          
+                          <div>
+                            <h3 className="text-lg font-semibold text-primary mb-3 flex items-center">
+                              <span className="w-6 h-6 bg-electric/10 rounded-full flex items-center justify-center mr-2">
+                                <span className="text-electric text-xs">✓</span>
+                              </span>
+                              La Solución Nexus IA
+                            </h3>
+                            <p className="text-muted-foreground leading-relaxed">{story.solution}</p>
+                          </div>
+                        </div>
+
+                        {/* Results */}
                         <div>
-                          <CardTitle className="text-2xl font-bold text-primary">{story.company}</CardTitle>
-                          <div className="flex gap-2 mt-2">
-                            <Badge variant="outline">{story.industry}</Badge>
-                            <Badge variant="outline">{story.size}</Badge>
+                          <h3 className="text-lg font-semibold text-primary mb-6 flex items-center">
+                            <TrendingUp className="w-5 h-5 text-electric mr-2" />
+                            Los Resultados
+                          </h3>
+                          <div className="grid grid-cols-2 gap-4 mb-6">
+                            {story.results.map((result, idx) => (
+                              <div key={idx} className="text-center p-4 bg-electric/5 rounded-lg">
+                                <div className="text-2xl font-bold text-electric">{result.metric}</div>
+                                <div className="text-sm text-muted-foreground">{result.description}</div>
+                              </div>
+                            ))}
+                          </div>
+                          
+                          <div className="bg-primary/5 p-4 rounded-lg">
+                            <div className="text-sm font-semibold text-primary mb-2">{story.roi}</div>
+                            <blockquote className="text-muted-foreground italic">
+                              "{story.testimonial}"
+                            </blockquote>
+                            <cite className="text-sm text-electric block mt-2 not-italic">
+                              — {story.testimonialAuthor}
+                            </cite>
                           </div>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <div className="text-sm text-muted-foreground">Implementación</div>
-                        <div className="font-semibold text-primary">{story.implementation}</div>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  
-                  <CardContent className="p-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                      {/* Challenge & Solution */}
-                      <div className="space-y-6">
-                        <div>
-                          <h3 className="text-lg font-semibold text-primary mb-3 flex items-center">
-                            <span className="w-6 h-6 bg-destructive/10 rounded-full flex items-center justify-center mr-2">
-                              <span className="text-destructive text-xs">!</span>
-                            </span>
-                            El Desafío
-                          </h3>
-                          <h4 className="font-semibold mb-2">{story.challenge}</h4>
-                          <p className="text-muted-foreground leading-relaxed">{story.description}</p>
-                        </div>
-                        
-                        <div>
-                          <h3 className="text-lg font-semibold text-primary mb-3 flex items-center">
-                            <span className="w-6 h-6 bg-electric/10 rounded-full flex items-center justify-center mr-2">
-                              <span className="text-electric text-xs">✓</span>
-                            </span>
-                            La Solución Nexus IA
-                          </h3>
-                          <p className="text-muted-foreground leading-relaxed">{story.solution}</p>
-                        </div>
-                      </div>
-
-                      {/* Results */}
-                      <div>
-                        <h3 className="text-lg font-semibold text-primary mb-6 flex items-center">
-                          <TrendingUp className="w-5 h-5 text-electric mr-2" />
-                          Los Resultados
-                        </h3>
-                        <div className="grid grid-cols-2 gap-4 mb-6">
-                          {story.results.map((result, idx) => (
-                            <div key={idx} className="text-center p-4 bg-electric/5 rounded-lg">
-                              <div className="text-2xl font-bold text-electric">{result.metric}</div>
-                              <div className="text-sm text-muted-foreground">{result.description}</div>
-                            </div>
-                          ))}
-                        </div>
-                        
-                        <div className="bg-primary/5 p-4 rounded-lg">
-                          <div className="text-sm font-semibold text-primary mb-2">{story.roi}</div>
-                          <blockquote className="text-muted-foreground italic">
-                            "{story.testimonial}"
-                          </blockquote>
-                          <cite className="text-sm text-electric block mt-2 not-italic">
-                            — {story.testimonialAuthor}
-                          </cite>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </div>
+              ))
+            ) : (
+              <div className="text-center text-muted-foreground text-lg">
+                No se encontraron casos de éxito para la industria seleccionada.
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
