@@ -20,7 +20,7 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <BrowserRouter basename="/insight-pivot-lab">
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/soluciones" element={<Soluciones />} />

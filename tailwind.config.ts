@@ -14,6 +14,11 @@ export default {
 			center: true,
 			padding: '2rem',
 			screens: {
+				'xs': '475px',
+				'sm': '640px',
+				'md': '768px',
+				'lg': '1024px',
+				'xl': '1280px',
 				'2xl': '1400px'
 			}
 		},
@@ -134,6 +139,13 @@ export default {
 				'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out'
+			},
+			animationDelay: {
+				'0': '0ms',
+				'200': '200ms',
+				'400': '400ms',
+				'600': '600ms',
+				'800': '800ms',
 			}
 		}
 	},

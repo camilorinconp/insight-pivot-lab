@@ -84,32 +84,49 @@ const Header = () => {
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-lg">
-            <div className="py-4 space-y-4">
-              {navigation.map((item) => (
+        <div className={cn(
+          "md:hidden fixed inset-0 top-20 bg-background/95 backdrop-blur-xl z-40 transition-all duration-300",
+          isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        )}>
+          <nav className="h-full flex flex-col justify-center px-6">
+            <div className="space-y-8 text-center">
+              {navigation.map((item, index) => (
                 <Link
                   key={item.name}
                   to={item.href}
                   className={cn(
-                    "block text-base font-medium text-center py-2",
+                    "block text-2xl font-medium py-4 transition-all duration-300 rounded-xl",
+                    "transform transition-transform duration-300",
+                    isMenuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
                     isActive(item.href)
-                      ? "text-primary bg-electric/10 rounded-md"
-                      : "text-muted-foreground hover:text-primary"
+                      ? "text-electric bg-electric/10 shadow-lg"
+                      : "text-muted-foreground hover:text-electric hover:bg-electric/5"
                   )}
+                  style={{ 
+                    transitionDelay: isMenuOpen ? `${index * 100}ms` : '0ms' 
+                  }}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
-              <div className="pt-4 px-4">
-                <Button variant="electric" size="sm" className="w-full">
+              
+              <div className={cn(
+                "pt-8 transform transition-all duration-300",
+                isMenuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+              )}
+              style={{ transitionDelay: isMenuOpen ? `${navigation.length * 100}ms` : '0ms' }}>
+                <Button 
+                  variant="electric" 
+                  size="lg" 
+                  className="w-full h-14 text-lg font-semibold rounded-xl shadow-glow"
+                >
                   Consultoría Gratuita
                 </Button>
               </div>
             </div>
-          </div>
-        )}
+          </nav>
+        </div>
       </div>
     </header>
   );

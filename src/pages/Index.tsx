@@ -1,6 +1,9 @@
-import { ArrowRight, Brain, Database, TrendingUp, CheckCircle, Users, Target, Lightbulb } from "lucide-react";
+import { ArrowRight, Brain, Database, TrendingUp, CheckCircle, Users, Target, Lightbulb, Sparkles, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { GradientButton } from "@/components/ui/gradient-button";
+import { FloatingParticles } from "@/components/ui/floating-particles";
+import { NeuralNetwork } from "@/components/ui/loading-ai";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AICalculator from "@/components/AICalculator";
@@ -64,27 +67,65 @@ const Index = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroImage})` }}
         >
-          <div className="absolute inset-0 bg-primary/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/80 to-purple-900/60"></div>
         </div>
+        
+        {/* Floating Particles */}
+        <FloatingParticles className="opacity-30" particleCount={30} speed={0.5} />
+        
+        {/* Neural Network Background */}
+        <NeuralNetwork className="absolute inset-0 opacity-20" />
+        
         <div className="relative container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-primary-foreground">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-up">
+          <div className="max-w-5xl mx-auto text-center text-primary-foreground">
+            <div className="mb-6 flex justify-center">
+              <div className="inline-flex items-center bg-electric/20 backdrop-blur-sm rounded-full px-6 py-2 border border-electric/30">
+                <Sparkles className="w-4 h-4 text-electric mr-2" />
+                <span className="text-sm font-medium text-electric">Transformación Digital con IA</span>
+              </div>
+            </div>
+            
+            <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-bold mb-6 animate-fade-up bg-gradient-to-r from-white via-electric to-cyan-300 bg-clip-text text-transparent leading-tight">
               De los Datos a las Decisiones
             </h1>
-            <p className="text-xl md:text-2xl mb-4 opacity-90 animate-fade-up">
-              La Transformación Digital Impulsada por IA que tu Empresa Necesita
+            
+            <p className="text-lg xs:text-xl sm:text-2xl md:text-3xl mb-4 opacity-90 animate-fade-up font-light tracking-wide px-4">
+              La Revolución de la <span className="text-electric font-semibold">Inteligencia Artificial</span> que tu Empresa Necesita
             </p>
-            <p className="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto animate-fade-up">
-              Ayudamos a empresas como la tuya a desbloquear su máximo potencial a través de la ciencia de datos y la inteligencia artificial, sin importar su tamaño.
+            
+            <p className="text-base xs:text-lg md:text-xl mb-10 opacity-80 max-w-4xl mx-auto animate-fade-up leading-relaxed px-4">
+              Transformamos datos complejos en insights accionables mediante IA de vanguardia. 
+              Descubre cómo empresas líderes están revolucionando sus industrias con nuestra tecnología.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up">
-              <Button variant="electric" size="xl" className="group">
-                Solicita una Consultoría Gratuita
+            
+            <div className="flex flex-col xs:flex-row gap-4 xs:gap-6 justify-center animate-fade-up px-4">
+              <GradientButton variant="ai" size="xl" glowEffect className="group w-full xs:w-auto">
+                <Zap className="w-5 h-5 mr-2" />
+                Consultoría Gratuita
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button variant="outline" size="xl" className="border-electric text-electric hover:bg-electric hover:text-electric-foreground">
-                Conoce Nuestras Soluciones
-              </Button>
+              </GradientButton>
+              
+              <GradientButton variant="ghost" size="xl" className="group w-full xs:w-auto">
+                <Brain className="w-5 h-5 mr-2" />
+                Ver Demo en Vivo
+                <Sparkles className="ml-2 w-5 h-5 group-hover:rotate-12 transition-transform" />
+              </GradientButton>
+            </div>
+            
+            {/* Stats Preview - Mobile Optimized */}
+            <div className="grid grid-cols-3 gap-4 xs:gap-8 mt-12 max-w-2xl mx-auto px-4">
+              <div className="text-center">
+                <div className="text-2xl xs:text-3xl md:text-4xl font-bold text-electric mb-2">95%</div>
+                <div className="text-xs xs:text-sm text-muted-foreground">Precisión en Predicciones</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl xs:text-3xl md:text-4xl font-bold text-electric mb-2">50%</div>
+                <div className="text-xs xs:text-sm text-muted-foreground">Reducción de Costos</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl xs:text-3xl md:text-4xl font-bold text-electric mb-2">3x</div>
+                <div className="text-xs xs:text-sm text-muted-foreground">ROI Promedio</div>
+              </div>
             </div>
           </div>
         </div>
@@ -114,38 +155,76 @@ const Index = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-              Nuestros 3 Pilares de Transformación
+      <section className="py-24 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background-accent/50 to-background"></div>
+        <div className="relative container mx-auto px-4">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center bg-electric/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
+              <Brain className="w-4 h-4 text-electric mr-2" />
+              <span className="text-sm font-medium text-electric">Nuestros Pilares</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 bg-gradient-to-r from-primary via-electric to-primary bg-clip-text text-transparent">
+              3 Pilares de Transformación
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Soluciones integrales que convierten la complejidad tecnológica en ventaja competitiva
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+              Soluciones integrales de IA que convierten la complejidad tecnológica en ventaja competitiva sostenible
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
             {services.map((service, index) => (
-              <Card key={index} className="border-0 shadow-card hover:shadow-glow transition-all duration-300 transform hover:-translate-y-2">
-                <CardHeader className="text-center pb-4">
-                  <div className="w-20 h-20 mx-auto mb-4 bg-electric/10 rounded-2xl flex items-center justify-center">
-                    {service.icon}
+              <Card key={index} className="group relative border-0 bg-card/50 backdrop-blur-sm shadow-elegant hover:shadow-glow transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 overflow-hidden">
+                {/* Animated Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-electric/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                {/* Neural Network Pattern */}
+                <div className="absolute top-0 right-0 w-32 h-32 opacity-5 group-hover:opacity-20 transition-opacity duration-500">
+                  <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="currentColor" className="text-electric" strokeWidth="1"/>
+                    <circle cx="20" cy="20" r="3" fill="currentColor" className="text-electric"/>
+                    <circle cx="80" cy="20" r="3" fill="currentColor" className="text-electric"/>
+                    <circle cx="80" cy="80" r="3" fill="currentColor" className="text-electric"/>
+                    <circle cx="20" cy="80" r="3" fill="currentColor" className="text-electric"/>
+                  </svg>
+                </div>
+                
+                <CardHeader className="text-center pb-6 relative z-10">
+                  <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-electric/20 to-electric/10 rounded-3xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                    <div className="text-electric transform group-hover:rotate-12 transition-transform duration-300">
+                      {service.icon}
+                    </div>
                   </div>
-                  <CardTitle className="text-xl font-bold text-primary">{service.title}</CardTitle>
+                  <CardTitle className="text-xl font-bold text-primary mb-3 group-hover:text-electric transition-colors duration-300">
+                    {service.title}
+                  </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-center text-muted-foreground leading-relaxed">
+                
+                <CardContent className="relative z-10">
+                  <CardDescription className="text-center text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors duration-300">
                     {service.description}
                   </CardDescription>
+                  
+                  {/* Hover CTA */}
+                  <div className="mt-6 text-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                    <Button variant="ghost" size="sm" className="text-electric border-electric/50 hover:bg-electric hover:text-white">
+                      Conocer Más
+                      <ArrowRight className="ml-2 w-4 h-4" />
+                    </Button>
+                  </div>
                 </CardContent>
+                
+                {/* Bottom accent line */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-electric to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
               </Card>
             ))}
           </div>
-          <div className="text-center mt-12">
-            <Button variant="hero" size="lg">
-              Descubre Nuestras Soluciones
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
+          
+          <div className="text-center mt-16">
+            <GradientButton variant="neural" size="lg" className="group">
+              <Database className="w-5 h-5 mr-2" />
+              Descubre Todas las Soluciones
+              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </GradientButton>
           </div>
         </div>
       </section>
